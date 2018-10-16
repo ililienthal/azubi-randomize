@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Randomzie</title>
+    </head>
+    <body>
+        <h1>List Randomzie</h1>
+        <p>Write a Javascript Function to ranomize the following List.</p>
+        <p>In this Document is a Javascript function randomize definiert, welche die Liste in eine Zufällige Reihenfolge bringen soll. Leider ist diese Funktion sehr langsam und liefert keine guten Ergebnisse.</p>
+        <p>Bitte verbessere die Function so das sie möglichst schnell die Liste ändert und diese möglichst zufällig ist.</p>
+        <p>Du kannst dazu in der Debugger Console einfach mit "function randomize(){...}" eine Funcktion definieren, sie wird dann vom Timerscript, nach Klick auf den Button, aufgerufen.</p>
+        <p><b>Extra</b>: Überlege die eine Methode um die "Zufälligkeit" der Liste zu messen.</p>
+        <div id="timer"></div>
+        <button onclick="sort()">Sort</button>
+        <button onclick="randomizeTimer()">Randomize</button>
+        <div id="listbox"></div>
+        <script type="text/javascript">
+            var count = 200000;
+
+            var listbox = document.getElementById('listbox');
+            var ul = document.createElement('ul');
+            var i;
+
+            var startTime;
+
+            for (i = 0; i < count; i++) {
+                let li = document.createElement('li');
+                li.innerHTML = i;
+                ul.appendChild(li);
+            }
+            listbox.appendChild(ul);
+
+            function sort() {
+                startTime = new Date().getTime();
+
+                var ul = document.querySelector('#listbox ul');
+                var children = Array.from(ul.children);
+                var sortedChildren = children.sort(function(a, b) {
+                    if (a.innerHTML * 1 < b.innerHTML * 1)
+                        return -1;
+                    if (a.innerHTML * 1 > b.innerHTML * 1)
+                        return 1;
+                    else
+                        return 0;
+                });
+                sortedChildren.forEach(function(child) {
+                    ul.appendChild(child);
+                })
+                var timeDiff = new Date().getTime() - startTime;
+                document.getElementById('timer').innerHTML = "The run needs " + timeDiff / 1000 + "s";
+            }
+
+            function randomizeTimer() {
+                startTime = new Date().getTime();
+                randomize();
+                var timeDiff = new Date().getTime() - startTime;
+                document.getElementById('timer').innerHTML = "The run needs " + timeDiff / 1000 + "s";
+            }
+
+            function randomize() {
+                var ul = document.querySelector('#listbox ul');
+                var children = Array.from(ul.children);
+                var i;
+                for (i = 0; i < 500; i++) {
+                    children.forEach(function(child) {
+                        if (Math.random() > 0.2)
+                            ul.appendChild(child);
+                    })
+                }
+            }
+        </script>
+    </body>
+</html>
