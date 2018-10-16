@@ -17,7 +17,7 @@
             var count = 200000;
 
             var listbox = document.getElementById('listbox');
-            var ul = document.createElement('ul');
+            var ol = document.createElement('ol');
             var i;
 
             var startTime;
@@ -25,15 +25,15 @@
             for (i = 0; i < count; i++) {
                 let li = document.createElement('li');
                 li.innerHTML = i;
-                ul.appendChild(li);
+                ol.appendChild(li);
             }
-            listbox.appendChild(ul);
+            listbox.appendChild(ol);
 
             function sort() {
                 startTime = new Date().getTime();
 
-                var ul = document.querySelector('#listbox ul');
-                var children = Array.from(ul.children);
+                var ol = document.querySelector('#listbox ol');
+                var children = Array.from(ol.children);
                 var sortedChildren = children.sort(function(a, b) {
                     if (a.innerHTML * 1 < b.innerHTML * 1)
                         return -1;
@@ -43,7 +43,7 @@
                         return 0;
                 });
                 sortedChildren.forEach(function(child) {
-                    ul.appendChild(child);
+                    ol.appendChild(child);
                 })
                 var timeDiff = new Date().getTime() - startTime;
                 document.getElementById('timer').innerHTML = "The run needs " + timeDiff / 1000 + "s";
@@ -57,13 +57,13 @@
             }
 
             function randomize() {
-                var ul = document.querySelector('#listbox ul');
-                var children = Array.from(ul.children);
+                var ol = document.querySelector('#listbox ol');
+                var children = Array.from(ol.children);
                 var i;
                 for (i = 0; i < 500; i++) {
                     children.forEach(function(child) {
                         if (Math.random() > 0.2)
-                            ul.appendChild(child);
+                            ol.appendChild(child);
                     })
                 }
             }
